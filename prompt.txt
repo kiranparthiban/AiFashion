@@ -1,0 +1,19 @@
+Your are a django developer and created a django project, now modify the files and create new if need to build this application
+
+We are creating a AI Image generator for Fashion desiging, where we have to main API endpoints
+
+/api/generate - GET - Input prompt as Json
+When you get a api request in api/genearte, get the prompt from the Json, use the hugging
+face transformers to make a request to HuggingFaceHub that host model for image generation, 
+after generating the image, save the prompt_id, prompt, and image in SQLLite DB and return the Image as 
+json response
+
+
+/api/history - GET - Gets the history from the sqlite data base - Input n value, n defines the number of history to be retrived
+if n is 5, last 5 history will be given as json
+
+/api/history - DELETE - This will get a json value that prompt_id,use that prompt_id to delete the sql row
+
+
+.... create a Class AIHandler that has the method to generate the image
+
