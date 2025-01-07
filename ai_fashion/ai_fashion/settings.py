@@ -4,10 +4,10 @@ from pathlib import Path
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security key
+# Secret key
 SECRET_KEY = 'your-secret-key'
 
-# Debug settings
+# Debug mode
 DEBUG = True
 
 # Allowed hosts
@@ -45,7 +45,7 @@ ROOT_URLCONF = 'ai_fashion.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, '../fashion_frontend')],  # Path to React's index.html directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,16 +79,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, '../fashion_frontend')]  # Mount the entire React app directory
 
 # CORS settings
-# Allow all origins during development
 CORS_ALLOW_ALL_ORIGINS = True
-
-# Uncomment and configure for production
-# CORS_ALLOWED_ORIGINS = [
-#     "http://your-frontend-domain.com",
-#     "http://another-allowed-domain.com",
-# ]
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
