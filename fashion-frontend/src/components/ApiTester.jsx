@@ -7,11 +7,25 @@ const ApiTester = () => {
   const baseUrl = "http://127.0.0.1:8000/api";
 
   return (
-    <div className="container">
-      <h1>AI Fashion API Tester</h1>
-      <GenerateImage baseUrl={baseUrl} />
-      <FetchHistory baseUrl={baseUrl} />
-      <DeleteHistory baseUrl={baseUrl} />
+    <div className="api-tester">
+      <div className="top-bar">
+        <div className="left-section">
+          <FetchHistory baseUrl={baseUrl} />
+        </div>
+        <div className="right-section">
+          <DeleteHistory baseUrl={baseUrl} />
+        </div>
+      </div>
+      <div className="main-content">
+        <div className="static-photo">
+          <img
+            src="/static/photo-placeholder.png"
+            alt="AI Enhanced Prompt Engine"
+          />
+          <h2>AI Enhanced Prompt Engine</h2>
+        </div>
+        <GenerateImage baseUrl={baseUrl} />
+      </div>
     </div>
   );
 };

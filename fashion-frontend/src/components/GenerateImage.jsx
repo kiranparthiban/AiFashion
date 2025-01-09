@@ -2,10 +2,16 @@ import React, { useState } from "react";
 
 const GenerateImage = ({ baseUrl }) => {
   const [prompt, setPrompt] = useState("");
+  const [generatedImage, setGeneratedImage] = useState(
+    "/converted_image.png" // Placeholder image
+  );
   const [response, setResponse] = useState("");
+  const [status, setStatus] = useState("");
 
   const generateImage = async () => {
-    setResponse("Generating image...");
+    setStatus("Generating response...");
+    setResponse(""); // Clear previous response
+
     try {
       const res = await fetch(`${baseUrl}/generate/`, {
         method: "POST",
@@ -14,73 +20,44 @@ const GenerateImage = ({ baseUrl }) => {
         },
         body: JSON.stringify({ prompt }),
       });
-
       const result = await res.json();
 
       if (res.ok) {
-        setResponse(
-          <div>
-            <strong>Prompt ID:</strong> {result.prompt_id}
-            <br />
-            <strong>Image:</strong>
-            <br />
-            <img
-              src={`data:image/png;base64,${result.image_url}`}
-              alt="Generated"
-              style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
-            />
-          </div>
-        );
+        setStatus("Successfully generated!");
+        setGeneratedImage(`data:image/png;base64,${result.image_url}`);
       } else {
-        setResponse(
-          <div>
-            <strong>Error:</strong> {result.error}
-          </div>
-        );
+        setStatus("Error incurred");
+        alert(`Error: ${result.error}`);
       }
     } catch (error) {
-      setResponse(
-        <div>
-          <strong>Error:</strong> {error.message}
-        </div>
-      );
+      setStatus("Error incurred");
+      alert(`Error: ${error.message}`);
     }
   };
 
   return (
-    <div>
-      <h2>Generate Image</h2>
+    <div className="generate-image-container">
+      <div className="generated-image-box">
+        <img src={generatedImage} alt="Generated" />
+      </div>
       <textarea
         rows="4"
         placeholder="Enter your fashion design prompt here"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "10px",
-          marginBottom: "10px",
-          border: "1px solid #ccc",
-          borderRadius: "4px",
-        }}
+        className="prompt-bar"
       ></textarea>
-      <button
-        onClick={generateImage}
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "#007bff",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        Generate Image
+      <button onClick={generateImage} className="generate-button">
+        Generate using AI Enhanced Prompt Engine
       </button>
-      <div className="response" style={{ marginTop: "20px" }}>
-        {response}
-      </div>
+      {/* Status Message */}
+      {status && <div className="status-message">{status}</div>}
     </div>
   );
 };
 
 export default GenerateImage;
+
+
+
+

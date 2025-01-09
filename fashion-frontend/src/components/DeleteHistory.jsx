@@ -5,7 +5,6 @@ const DeleteHistory = ({ baseUrl }) => {
   const [response, setResponse] = useState("");
 
   const deleteHistory = async () => {
-    setResponse("Deleting entry...");
     try {
       const res = await fetch(`${baseUrl}/history/`, {
         method: "DELETE",
@@ -15,39 +14,27 @@ const DeleteHistory = ({ baseUrl }) => {
         body: JSON.stringify({ prompt_id: promptId }),
       });
       const result = await res.json();
-      if (res.ok) {
-        setResponse(
-          <div>
-            <strong>Message:</strong> {result.message}
-          </div>
-        );
-      } else {
-        setResponse(
-          <div>
-            <strong>Error:</strong> {result.error}
-          </div>
-        );
-      }
-    } catch (error) {
       setResponse(
-        <div>
-          <strong>Error:</strong> {error.message}
-        </div>
+        res.ok ? `Message: ${result.message}` : `Error: ${result.error}`
       );
+    } catch (error) {
+      setResponse(`Error: ${error.message}`);
     }
   };
 
   return (
-    <div>
-      <h2>Delete History</h2>
+    <div className="delete-history-popup">
       <input
         type="number"
+        placeholder="Enter Prompt ID"
         value={promptId}
         onChange={(e) => setPromptId(e.target.value)}
-        placeholder="Enter Prompt ID"
+        className="delete-history-input"
       />
-      <button onClick={deleteHistory}>Delete Entry</button>
-      <div className="response">{response}</div>
+      <button onClick={deleteHistory} className="delete-button">
+        Delete
+      </button>
+      <p>{response}</p>
     </div>
   );
 };

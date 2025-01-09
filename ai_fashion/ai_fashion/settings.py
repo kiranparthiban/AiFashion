@@ -79,7 +79,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '../fashion_frontend')]  # Mount the entire React app directory
+STATICFILES_DIRS = [os.path.join(BASE_DIR, '../fashion-frontend')]  # Mount the entire React app directory
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
