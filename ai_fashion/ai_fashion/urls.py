@@ -9,9 +9,10 @@ import os
 urlpatterns = [
     # Admin panel
     path('admin/', admin.site.urls),
-
+    path('auth_app/', include('auth_app.urls')),
     # API routes
     path('api/', include('api.urls')),
+    path('', include('auth_app.urls')),
 
     # Serve React frontend for root URL and unmatched routes
     # re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),  # React's index.html

@@ -6,4 +6,4 @@ django-cors-headers
 transformers 
 torch
 diffusers
-djangorestframework-simplejwt
+react-router-dom
