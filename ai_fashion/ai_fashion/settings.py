@@ -102,3 +102,5 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
