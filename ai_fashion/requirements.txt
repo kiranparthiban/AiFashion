@@ -1,9 +1,0 @@
-django
-djangorestframework
-huggingface-hub
-Pillow
-django-cors-headers
-transformers 
-torch
-diffusers
-djangorestframework-simplejwt
